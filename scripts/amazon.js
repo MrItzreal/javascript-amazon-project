@@ -12,7 +12,7 @@ const products = [
   },
 
   {
-    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
+    image: "images/products/intermediate-composite-basketball.jpg",
     name: "Intermediate Size Basketball",
     rating: {
       stars: 4,
@@ -38,6 +38,8 @@ let productsHTML = "";
 products.forEach((product) => {
   //since JS does not do well with decimals we divide the,
   //whole price by 100 so we can get the exact merch price.
+  //.toFixed():it helps to show a number with two decimal places,
+  //.toFixed():forces the equation to show two decimals even if divided by 100.
 
   productsHTML += `
   <div class="product-container">
@@ -61,12 +63,12 @@ products.forEach((product) => {
   </div>
 
   <div class="product-price">
-  $${product.priceCents / 100}
+  $${(product.priceCents / 100).toFixed(2)}
   </div>
 
   <div class="product-quantity-container">
     <select>
-      <option selected value="1">1</option>
+      <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
@@ -92,3 +94,5 @@ products.forEach((product) => {
 });
 
 console.log(productsHTML);
+
+document.querySelector(".js-products-grid").innerHTML = productsHTML;
