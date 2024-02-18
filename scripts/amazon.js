@@ -6,6 +6,8 @@ products.forEach((product) => {
   //whole price by 100 so we can get the exact merch price.
   //.toFixed():it helps to show a number with two decimal places,
   //.toFixed():forces the equation to show two decimals even if divided by 100.
+  //Data Attribute: is an HTML attribute that allows us to attach information to elements,
+  //it has to start w/ "data-" and then you can name it whatever you want.
 
   productsHTML += `
   <div class="product-container">
@@ -54,11 +56,38 @@ products.forEach((product) => {
     Added
   </div>
 
-  <button class="add-to-cart-button button-primary">Add to Cart</button>
+  <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="
+  ${product.id}">
+  Add to Cart
+  </button>
 </div>
 `;
 });
 
-console.log(productsHTML);
-
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+  button.addEventListener("click", () => {
+    //.dataset helps us get the data from properties,
+    //but we use camelCase to access the data instead of kebab-case.
+    const productId = button.dataset.productId;
+
+    //checks if product is already in cart.
+    let matchingItem;
+
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+    }); //if product already in cart it increases the quantity.
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    } //if not in cart, then it adds to cart.
+    else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+      });
+    }
+    console.log(cart);
+  });
+});
