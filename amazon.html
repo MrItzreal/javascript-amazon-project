@@ -58,8 +58,25 @@
     <div class="main">
       <div class="products-grid js-products-grid"></div>
     </div>
-    <script src="data/cart.js"></script>
+
     <script src="data/products.js"></script>
-    <script src="scripts/amazon.js"></script>
+    <script type="module" src="scripts/amazon.js"></script>
   </body>
 </html>
+
+<!-- type="module" attribute enables the file to get variables from other files.  
+    -export lets us use variables outside of their files ex:
+     "export const cart = [];"
+    -import lets us import the variables we need ex:
+     import { cart } from "../data/cart.js";
+
+In summary,the steps to get a variable out of a file:
+   1- Add type="module" attribute to enable this feature.
+   2- Export: the variable we need to get out.
+   3- Import: the variable we need to use.
+
+Benefits of "Modules":
+    1-It helps us avoid naming conflicts.
+    2-Don't have to worry about the order of our js-script files.
+    3-Modules are a better way to organize our code as our projects get bigger.
+  -->
