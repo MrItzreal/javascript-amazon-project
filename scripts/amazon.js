@@ -12,6 +12,8 @@ products.forEach((product) => {
   //.toFixed():forces the equation to show two decimals even if divided by 100.
   //Data Attribute: is an HTML attribute that allows us to attach information to elements,
   //it has to start w/ "data-" and then you can name it whatever you want.
+  //IMPORTANT: when using data attribute make sure to write the ${} without space ex:,
+  //="${}}" if you accidentally space code will not work.
 
   productsHTML += `
   <div class="product-container">

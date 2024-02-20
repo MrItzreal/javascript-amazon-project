@@ -17,7 +17,8 @@ cart.forEach((cartItem) => {
   });
 
   cartSummaryHTML += ` 
-  <div class="cart-item-container">
+  <div class="cart-item-container 
+  js-cart-item-container-${matchingProduct.id}">
 <div class="delivery-date">Delivery date: Tuesday, June 21</div>
 
 <div class="cart-item-details-grid">
@@ -93,11 +94,18 @@ cart.forEach((cartItem) => {
 
 document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 
+//Deletes items from our cart thanks to:
+//DOM manipulation and its method: .remove().
 document.querySelectorAll(".js-delete-link").forEach((link) => {
   link.addEventListener("click", () => {
     const productId = link.dataset.productId;
     removeFromCart(productId);
-    console.log(cart);
+
+    const container = document.querySelector(
+      //we used template string to insert productId into the string.
+      `.js-cart-item-container-${productId}`
+    );
+    container.remove();
   });
 });
 
@@ -106,3 +114,5 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
 //it has to start w/ "data-" and then you can name it whatever you want.
 //.dataset helps us get the data from properties,
 //but we use camelCase to access the data instead of kebab-case.
+//IMPORTANT: when using data attribute make sure to write the ${} without space ex:,
+//="${}}" if you accidentally space code will not work.
