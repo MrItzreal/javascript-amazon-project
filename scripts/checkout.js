@@ -31,6 +31,8 @@ cart.forEach((cartItem) => {
     }
   });
 
+  //Delivery options: FREE, $4.99 or $9.99 shipping.
+  //dayjs was also used to get correct dates for options.
   const deliveryOptionId = cartItem.deliveryOptionId;
 
   let deliveryOption;
