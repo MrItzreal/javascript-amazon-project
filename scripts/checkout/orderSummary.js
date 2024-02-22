@@ -1,24 +1,12 @@
 import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
-import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import {
   deliveryOptions,
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
-
-hello();
-
-//Dayjs external library.
-//Method .add() takes 2 parameters:
-//1-number of time you want to add such as: 1,7,15 etc.
-//2-length of time you want such as: days.
-//Something to note is that not all external libraries have esm versions,
-//so you may still need to use script tags in order to use them.
-const today = dayjs();
-const deliveryDate = today.add(7, "days");
-console.log(deliveryDate.format("dddd, MMMM, D"));
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 //Function renderOrderSummary runs the entire code so we can refresh,
 //the delivery options without us having to click refresh.
@@ -140,6 +128,8 @@ export function renderOrderSummary() {
         `.js-cart-item-container-${productId}`
       );
       container.remove();
+      //After clicking delete, it updates the data and regenerates the HTML.
+      renderPaymentSummary();
     });
   });
 
@@ -154,6 +144,7 @@ export function renderOrderSummary() {
       //which re-renders our page so when we choose a delivery option it,
       //will refresh automatically the changes in the dates.
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 }
