@@ -1,9 +1,12 @@
 import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import {
+  deliveryOptions,
+  getDeliveryOption,
+} from "../../data/deliveryOptions.js";
 
 hello();
 
@@ -26,26 +29,19 @@ export function renderOrderSummary() {
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
 
-    let matchingProduct;
-
-    products.forEach((product) => {
-      if (product.id === productId) {
-        matchingProduct = product;
-      }
-    });
+    //takes product ID and finds the matching product.
+    //getProduct is the function in the products.js file.
+    const matchingProduct = getProduct(productId);
 
     //Delivery options: FREE, $4.99 or $9.99 shipping.
     //dayjs was also used to get correct dates for options.
     const deliveryOptionId = cartItem.deliveryOptionId;
 
-    let deliveryOption;
+    //This is for when we select a different shipping order the,
+    //shipping & handling in the order summary will change.
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    deliveryOptions.forEach((option) => {
-      if (option.id === deliveryOptionId) {
-        deliveryOption = option;
-      }
-    });
-
+    //dayjs external library for dates.
     const today = dayjs();
     const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
     const dateString = deliveryDate.format("dddd, MMMM, D");
