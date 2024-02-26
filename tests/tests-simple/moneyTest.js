@@ -1,4 +1,4 @@
-import { formatCurrency } from "../scripts/utils/money.js";
+import { formatCurrency } from "../../scripts/utils/money.js";
 
 //These are TEST CASES. They test if our code is working.
 //2 types of Test Cases:
