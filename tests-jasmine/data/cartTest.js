@@ -1,5 +1,8 @@
 import { addToCart, cart, loadFromStorage } from "../../data/cart.js";
 
+//Testing only a portion of your code is called: "Uni Tests".
+//Testing many units/pieces of code is called "Integration Tests".
+
 describe("test suite: addToCart", () => {
   it("adds an existing product to the cart", () => {
     //A mock only lasts for 1 test thus why we are mocking,
